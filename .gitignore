@@ -1,0 +1,8 @@
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+backend/compression_count.json
+frontend/node_modules/
+.env
+.DS_Store
+frontend/dist/
