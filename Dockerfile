@@ -2,7 +2,7 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-# Install system deps + Node for building frontend
+# Install system deps + Node
 RUN apt-get update && apt-get install -y \
     nodejs npm curl git \
     && rm -rf /var/lib/apt/lists/*
@@ -16,8 +16,8 @@ RUN python -m spacy download en_core_web_sm
 COPY frontend/ ./frontend/
 RUN cd frontend && npm install && npm run build
 
-# Move built frontend into backend/static
-RUN cp -r frontend/dist ./backend/static
+# Create static folder and copy built frontend into it
+RUN mkdir -p ./backend/static && cp -r frontend/dist/. ./backend/static/
 
 # Copy backend code
 COPY backend/ ./backend/
